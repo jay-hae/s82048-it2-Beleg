@@ -7,11 +7,11 @@ import java.io.*;
 import java.net.*;
 import java.text.DecimalFormat;
 import java.util.*;
+//import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.List;
 import javax.swing.*;
 import javax.swing.Timer;
 
@@ -226,14 +226,14 @@ public class Client {
 
         // Init non-blocking RTPsocket that will be used to receive data
         try {
-          // TASK construct a new DatagramSocket to receive server RTP packets on port RTP_RCV_PORT
-          RTPsocket = new DatagramSocket();
-
+          // TASK construct a new DatagramSocket to receive server RTP packets on port RTP_RCV_PORT RTPsocket = new DatagramSocket(); 
           // for now FEC packets are received via RTP-Port, so keep comment below
+          RTPsocket = new DatagramSocket(RTP_RCV_PORT);
           // FECsocket = new DatagramSocket(FEC_RCV_PORT);
 
           // TASK set Timeout value of the socket to 1 ms
-          // ....
+          RTPsocket.setSoTimeout(1);
+          
           logger.log(Level.FINE, "Socket receive buffer: " + RTPsocket.getReceiveBufferSize());
 
           rtpHandler.setFecDecryptionEnabled(checkBoxFec.isSelected());
@@ -265,7 +265,7 @@ public class Client {
           // TASK change RTSP state and print new state to console and statusLabel
           // state = ....
           // statusLabel
-          // logger.log(Level.INFO, "New RTSP state: \n");
+          logger.log(Level.INFO, "New RTSP state: \n");
         }
       } // else if state != INIT then do nothing
     }
@@ -602,17 +602,18 @@ public class Client {
 
       String rtspReq = "";
       //TASK Complete the RTSP request method line
-      // rtspReq = ....
+      rtspReq = request_type + rtsp + "RTSP/1.0" + CRLF;
 
       // TASK write the CSeq line:
-      // rtspReq += ....
+      rtspReq += Integer.toString(RTSPSeqNb) + CRLF;
 
       // check if request_type is equal to "SETUP" and in this case write the Transport: line
       // advertising to the server the port used to receive the RTP packets RTP_RCV_PORT
       // otherwise, write the Session line from the RTSPid field
       if (request_type.equals("SETUP")) {
+        //TODO
         //TASK Complete the Transport Attribute
-        rtspReq += "Transport:";
+        rtspReq += "Transport: " + "RTP/AVP" + "unicast;client_port="+Integer.toString(RTP_RCV_PORT)+Integer.toString(RTP_RCV_PORT+1);
       }
 
       // SessionIS if available
