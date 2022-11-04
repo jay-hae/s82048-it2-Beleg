@@ -515,13 +515,14 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
   /** Creates a OPTIONS response string
    * @return  Options string, starting with: Public: ...
    */
-  //TASK Complete the OPTIONS response
+  //TASKK Complete the OPTIONS response
   private String options() {
-    return "....";
+    return "Public: DESCRIBE, SETUP, TEARDOWN, PLAY, PAUSE";
   }
 
 
   /** Creates a DESCRIBE response string in SDP format for current media */
+  //TODO
   //TASK Complete the DESCRIBE response
   private String describe() {
     StringWriter rtspHeader = new StringWriter();
@@ -530,12 +531,13 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
 
     // Write the body first so we can get the size later
     rtspBody.write("v=0" + CRLF);
-    rtspBody.write("...");
-    rtspBody.write("...");
-    rtspBody.write("...");
+    rtspBody.write("o=" +"Jakob Haecker" + "123456"+ CRLF);
+    rtspBody.write("s=" +"Beleg_Session"+ CRLF);
+    rtspBody.write("t=" +"0 0"+ CRLF); // 0 da Ondemand
+    rtspBody.write("m=" +"video 8554 RTP/AVP 32"+ CRLF);
 
-    rtspHeader.write("Content-Base: " + "");
-    rtspHeader.write("Content-Type: " + "");
+    rtspHeader.write("Content-Base: " + "rtsp://localhost/home/jay/module/it2/htw.mjpeg"); //TODO localhost evtl Dynamisch ermitteln
+    rtspHeader.write("Content-Type: " + "application/sdp");
     rtspHeader.write("Content-Length: " + "");
     rtspHeader.write(CRLF);
 
