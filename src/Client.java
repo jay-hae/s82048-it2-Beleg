@@ -266,8 +266,8 @@ public class Client {
         } else {
           // TASKK change RTSP state and print new state to console and statusLabel
           state = READY;
-          // statusLabel
-          logger.log(Level.INFO, "New RTSP state: READY\n");
+          logger.log(Level.INFO, "New RTSP State: READY\n");
+          statusLabel.setText("State: READY");
         }
       } // else if state != INIT then do nothing
     }
@@ -293,6 +293,8 @@ public class Client {
         else {
           //TASKK change RTSP state and print out new state to console an statusLabel
           state = PLAYING;
+          logger.log(Level.INFO, "New RTSP State: PLAYING\n");
+          statusLabel.setText("State: PLAYING");
 
           // start the timer
           timer.start();
@@ -320,8 +322,10 @@ public class Client {
           logger.log(Level.WARNING, "Invalid Server Response");
         }
         else {
-          // TASK change RTSP state and print out new state to console and statusLabel
+          // TASKK change RTSP state and print out new state to console and statusLabel
           state = READY;
+          logger.log(Level.INFO, "New RTSP State: PAUSE");
+          statusLabel.setText("State: PAUSE");
 
           // stop the timer
           timer.stop();
@@ -352,6 +356,8 @@ public class Client {
       else {
         // TASKK change RTSP state and print out new state to console and statusLabel
         state = INIT;
+        logger.log(Level.INFO, "New RTSP State: INIT");
+        statusLabel.setText("State: INIT");
 
         // stop the timer
         timer.stop();

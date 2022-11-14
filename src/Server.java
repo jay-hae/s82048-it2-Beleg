@@ -68,7 +68,7 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
   static BufferedReader RTSPBufferedReader;
   static BufferedWriter RTSPBufferedWriter;
   static String VideoFileName = ""; // video file requested from the client
-  static String VideoDir = "videos/";
+  static String VideoDir = "/home/jay/module/it2/s82048-it2-Beleg/"; 
   static int RTSP_ID = 123456; // ID of the RTSP session
   int RTSPSeqNb = 0; // Sequence number of RTSP messages within the session
   String sdpTransportLine = "";
@@ -517,12 +517,11 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
    */
   //TASKK Complete the OPTIONS response
   private String options() {
-    return "Public: DESCRIBE, SETUP, TEARDOWN, PLAY, PAUSE";
+    return "Public: DESCRIBE, SETUP, TEARDOWN, PLAY, PAUSE" +CRLF;
   }
 
 
   /** Creates a DESCRIBE response string in SDP format for current media */
-  //TODO
   //TASK Complete the DESCRIBE response
   private String describe() {
     StringWriter rtspHeader = new StringWriter();
@@ -536,9 +535,9 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
     rtspBody.write("t=" +"0 0"+ CRLF); // 0 da Ondemand
     rtspBody.write("m=" +"video 8554 RTP/AVP 32"+ CRLF);
 
-    rtspHeader.write("Content-Base: " + "rtsp://localhost/home/jay/module/it2/htw.mjpeg"); //TODO localhost evtl Dynamisch ermitteln
-    rtspHeader.write("Content-Type: " + "application/sdp");
-    rtspHeader.write("Content-Length: " + "");
+    rtspHeader.write("Content-Base: " + "rtsp://localhost/" + VideoFileName + CRLF); //TODO localhost evtl Dynamisch ermitteln
+    rtspHeader.write("Content-Type: " + "application/sdp"+ CRLF);
+    rtspHeader.write("Content-Length: " + rtspBody.toString().length()+ CRLF);
     rtspHeader.write(CRLF);
 
     return rtspHeader.toString() + rtspBody.toString();
