@@ -2,3 +2,11 @@ start-compile funktioniert nicht!
 
 In ordner s82047.../
 javac ../../../src/*.java -d . [ausführen!]
+
+
+FEC - in FEC Handler Class:
+1. FEC Check
+2. gucken ob alle Packete aus Liste da sind
+
+
+Anlegen mit FECPacket()

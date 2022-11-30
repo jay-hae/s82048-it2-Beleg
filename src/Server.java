@@ -379,15 +379,15 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
     String label;
     if (fec) label = " fec ";
     else label = " media ";
-    // TASK correct the if-instruction to work properly
-    if (random.nextDouble() > 0.0) {
+    // TASKK correct the if-instruction to work properly
+    if (random.nextDouble() > lossRate) {
       logger.log(Level.FINE, "Send frame: " + imagenb + label);
       RTPsocket.send(senddp);
     } else {
       System.err.println("Dropped frame: " + imagenb + label);
       if (!fec) dropCounter++;
     }
-    // System.out.println("Drop count media packets: " +  dropCounter);
+    System.out.println("Drop count media packets: " +  dropCounter);
   }
 
   /**
