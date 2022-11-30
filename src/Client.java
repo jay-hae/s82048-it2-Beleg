@@ -471,26 +471,43 @@ public class Client {
       //TASK complete the statistics
     private void setStatistics(ReceptionStatistic rs) {
       DecimalFormat df = new DecimalFormat("###.###");
+      int pufferSize = rs.latestSequenceNumber - rs.playbackIndex;
+      String ratioPacketLost = ""; 
+      String ratioFramesLost = ""; 
+      String ratioCorrectedPacketsLost = "";
+      String ratioNotCorrectedPacketsLost = "";
+      if (rs.receivedPackets != 0) {
+        ratioPacketLost = String.valueOf(rs.packetsLost / rs.receivedPackets);
+        ratioCorrectedPacketsLost = String.valueOf(rs.correctedPackets / rs.receivedPackets);
+        ratioNotCorrectedPacketsLost = String.valueOf(rs.notCorrectedPackets / rs.receivedPackets);
+      }
+      if (rs.requestedFrames != 0) ratioFramesLost = String.valueOf(rs.framesLost / rs.requestedFrames);
       pufferLabel.setText(
           "Puffer: "
-              + ""  //
-              + " aktuelle Nr. / Summe empf.: "
-              + " / "
-              + "");
+              + String.valueOf(pufferSize)  + " / " 
+              + "aktuelle Nr.: " 
+              + String.valueOf(rs.playbackIndex)+ " / " 
+              + "Summe empf.: "
+              + String.valueOf(rs.receivedPackets) + " / "
+              + "Angeforderte Frames: "
+              + String.valueOf(rs.requestedFrames));
       statsLabel.setText(
-          "<html>Abspielzähler / verlorene Medienpakete // Bilder / verloren: "
-              + ""
-              + " / "
-              + ""
+          "<html> Abspielzähler: verlorene Medienpakete: " 
+              + String.valueOf(rs.packetsLost)
+              + " Ratio: " +  ratioPacketLost 
+              + " verloren Bilder: "
+              + String.valueOf(rs.framesLost)
+              + " Ratio: " + ratioFramesLost 
               + "<p/>"
               + "</html>");
       fecLabel.setText(
-          "FEC: korrigiert / nicht korrigiert: "
-              + ""
+          "FEC: korrigiert: "
+              + String.valueOf(rs.correctedPackets) 
+              + " Ratio: " + ratioCorrectedPacketsLost 
               + " / "
-              + ""
-              + "  Ratio: "
-              + "");
+              + "nicht korrigiert: "
+              + String.valueOf(rs.notCorrectedPackets) + " / "
+              + " Ratio: "+ ratioNotCorrectedPacketsLost );
     }
   }
 
