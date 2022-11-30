@@ -68,7 +68,7 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
   static BufferedReader RTSPBufferedReader;
   static BufferedWriter RTSPBufferedWriter;
   static String VideoFileName = ""; // video file requested from the client
-  static String VideoDir = "/home/jay/module/it2/s82048-it2-Beleg/"; 
+  static String VideoDir = "videos/"; 
   static int RTSP_ID = 123456; // ID of the RTSP session
   int RTSPSeqNb = 0; // Sequence number of RTSP messages within the session
   String sdpTransportLine = "";
@@ -522,7 +522,7 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
 
 
   /** Creates a DESCRIBE response string in SDP format for current media */
-  //TASK Complete the DESCRIBE response
+  //TASKK Complete the DESCRIBE response
   private String describe() {
     StringWriter rtspHeader = new StringWriter();
     StringWriter rtspBody = new StringWriter();

@@ -1,0 +1,4 @@
+start-compile funktioniert nicht!
+
+In ordner s82047.../
+javac ../../../src/*.java -d . [ausführen!]
