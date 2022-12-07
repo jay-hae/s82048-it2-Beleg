@@ -468,20 +468,21 @@ public class Client {
       }
     }
 
-      //TASK complete the statistics
-    private void setStatistics(ReceptionStatistic rs) {
+      //TASKK complete the statistics TODO Ratio ist immer 0
+    private void setStatistics(ReceptionStatistic rs){
       DecimalFormat df = new DecimalFormat("###.###");
+     
       int pufferSize = rs.latestSequenceNumber - rs.playbackIndex;
       String ratioPacketLost = ""; 
       String ratioFramesLost = ""; 
       String ratioCorrectedPacketsLost = "";
       String ratioNotCorrectedPacketsLost = "";
       if (rs.receivedPackets != 0) {
-        ratioPacketLost = String.valueOf(rs.packetsLost / rs.receivedPackets);
-        ratioCorrectedPacketsLost = String.valueOf(rs.correctedPackets / rs.receivedPackets);
-        ratioNotCorrectedPacketsLost = String.valueOf(rs.notCorrectedPackets / rs.receivedPackets);
+        ratioPacketLost = df.format( (double) rs.packetsLost / (double)  rs.receivedPackets);
+        ratioCorrectedPacketsLost = df.format((double) rs.correctedPackets / (double) rs.receivedPackets);
+        ratioNotCorrectedPacketsLost = df.format((double) rs.notCorrectedPackets / (double) rs.receivedPackets);
       }
-      if (rs.requestedFrames != 0) ratioFramesLost = String.valueOf(rs.framesLost / rs.requestedFrames);
+      if (rs.requestedFrames != 0) ratioFramesLost = df.format((double) rs.framesLost / (double) rs.requestedFrames);
       pufferLabel.setText(
           "Puffer: "
               + String.valueOf(pufferSize)  + " / " 
