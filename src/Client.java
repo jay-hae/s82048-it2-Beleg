@@ -478,9 +478,9 @@ public class Client {
       String ratioCorrectedPacketsLost = "";
       String ratioNotCorrectedPacketsLost = "";
       if (rs.receivedPackets != 0) {
-        ratioPacketLost = df.format( (double) rs.packetsLost / (double)  rs.receivedPackets);
-        ratioCorrectedPacketsLost = df.format((double) rs.correctedPackets / (double) rs.receivedPackets);
-        ratioNotCorrectedPacketsLost = df.format((double) rs.notCorrectedPackets / (double) rs.receivedPackets);
+        ratioPacketLost = df.format((double) (rs.latestSequenceNumber - rs.receivedPackets) / (double)  rs.latestSequenceNumber);
+        ratioCorrectedPacketsLost = df.format((double) rs.correctedPackets / (double) rs.notCorrectedPackets);
+        ratioNotCorrectedPacketsLost = df.format((double) rs.notCorrectedPackets / (double) rs.latestSequenceNumber);
       }
       if (rs.requestedFrames != 0) ratioFramesLost = df.format((double) rs.framesLost / (double) rs.requestedFrames);
       pufferLabel.setText(

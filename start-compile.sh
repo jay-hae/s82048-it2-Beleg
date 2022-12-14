@@ -14,6 +14,7 @@ bin=out/production/RTSP-Streaming
 echo "compile classes..."
 javac -cp $src ${src}/Server.java  -d $bin 
 javac -cp $src ${src}/Client.java  -d $bin 
+javac -cp $src ${src}/FecHandler.java  -d $bin 
 
 # Start
 echo "start classes..."

@@ -157,7 +157,17 @@ public class FecHandler {
    */
   public boolean checkCorrection(int nr, HashMap<Integer, RTPpacket> mediaPackets) {
     //TASK complete this method!
-    return false;
+    // wird aufgerufen wenn eins verloren ist, verlorenes RTPPacket: nr
+    // start_compile all compeliert 
+    Integer fecPacketNr = fecNr.get(nr); //holen Nummer des zugehörigen FECPacketes
+    if (fecStack.get(fecPacketNr) == null) return false; // Prüft ob FEC packet überhaupt da
+    List<Integer> involedMedPacketsNrs = fecList.get(nr); 
+    for (Integer i : involedMedPacketsNrs){
+      if (i != nr && mediaPackets.get(i) == null){
+        return false; // jetzt wissen wir das mehr als 2 Packete fehlen
+      }
+    }
+    return true;
   }
 
   /**
@@ -168,7 +178,14 @@ public class FecHandler {
    */
   public RTPpacket correctRtp(int nr, HashMap<Integer, RTPpacket> mediaPackets) {
     //TASK complete this method!
-    return fec.getLostRtp(nr);
+    FECpacket newfec = fecStack.get(fecNr.get(nr));
+    List<Integer> involvedMedPacketsNrs = fecList.get(nr);
+    for (Integer i : involvedMedPacketsNrs){
+      if (i != nr){
+        newfec.addRtp(mediaPackets.get(i));
+      }
+    }
+    return newfec.getLostRtp(nr);
   }
 
   /**
@@ -178,6 +195,7 @@ public class FecHandler {
    */
   private void clearStack(int nr) {
     //TASK complete this method!
+    fecStack.clear();
   }
 
   // *************** Receiver Statistics ***********************************************************
