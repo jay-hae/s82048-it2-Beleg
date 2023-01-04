@@ -108,6 +108,12 @@ public class FecHandler {
   /** Reset of fec group and variables */
   private void clearSendGroup() {
     // TODO
+    nrReceived = 0; 
+    nrLost = 0;
+    nrCorrected = 0;
+    nrNotCorrected = 0;
+    nrFramesRequested = 0;
+    nrFramesLost = 0;
   }
 
   /**
@@ -130,8 +136,8 @@ public class FecHandler {
     Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     // build fec from rtp
     fec = new FECpacket(rtp.getpacket(), rtp.getpacket().length);
-    // TASK remove comment for debugging
-    // fec.printHeaders();
+    // TASKK remove comment for debugging
+    fec.printHeaders();
 
     // stores fec
     int seqNrFec = fec.getsequencenumber();
@@ -156,7 +162,7 @@ public class FecHandler {
    * @return true if possible
    */
   public boolean checkCorrection(int nr, HashMap<Integer, RTPpacket> mediaPackets) {
-    //TASK complete this method!
+    //TASKK complete this method!
     // wird aufgerufen wenn eins verloren ist, verlorenes RTPPacket: nr
     // start_compile all compeliert 
     Integer fecPacketNr = fecNr.get(nr); //holen Nummer des zugehörigen FECPacketes
@@ -177,7 +183,7 @@ public class FecHandler {
    * @return RTP packet
    */
   public RTPpacket correctRtp(int nr, HashMap<Integer, RTPpacket> mediaPackets) {
-    //TASK complete this method!
+    //TASKK complete this method!
     FECpacket newfec = fecStack.get(fecNr.get(nr));
     List<Integer> involvedMedPacketsNrs = fecList.get(nr);
     for (Integer i : involvedMedPacketsNrs){
