@@ -480,7 +480,7 @@ public class Client {
       if (rs.latestSequenceNumber != 0) {
         ratioPacketLost = df.format((double) (rs.latestSequenceNumber - rs.receivedPackets) / (double)  rs.latestSequenceNumber);
         ratioCorrectedPacketsLost = df.format((double) rs.correctedPackets / (double) rs.latestSequenceNumber); //rs.notCorrectedPackets);
-        ratioNotCorrectedPacketsLost = df.format((double) ( rs.latestSequenceNumber - rs.receivedPackets + rs.correctedPackets )/ (double) rs.latestSequenceNumber);
+        ratioNotCorrectedPacketsLost = df.format((double) 1 - ( rs.correctedPackets / (double) (rs.correctedPackets + rs.notCorrectedPackets)));
       }
       if (rs.requestedFrames != 0) ratioFramesLost = df.format((double) rs.framesLost / (double) rs.requestedFrames);
       pufferLabel.setText(
@@ -502,9 +502,9 @@ public class Client {
               + "<p/>"
               + "</html>");
       fecLabel.setText(
-          "FEC: korrigiert: "
-              + String.valueOf(rs.correctedPackets) 
-              + " Ratio: " + ratioCorrectedPacketsLost  // ?? muss das sein?
+          "FEC: korrigiert / nicht korrigiert: "
+              + String.valueOf(rs.correctedPackets) + " / " + String.valueOf(rs.notCorrectedPackets)
+              + " Ratio: " + ratioNotCorrectedPacketsLost  // ?? muss das sein?
               + " / "
               + "nicht korrigiert: "
               + String.valueOf(rs.notCorrectedPackets) + " / "
