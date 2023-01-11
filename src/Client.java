@@ -471,7 +471,7 @@ public class Client {
       //TASKK complete the statistics TODO Ratio ist immer 0
     private void setStatistics(ReceptionStatistic rs){
       DecimalFormat df = new DecimalFormat("###.###");
-     
+      //Frage: ist latestSequenceNumber nur die Nummer der Medienpackete
       int pufferSize = rs.latestSequenceNumber - rs.playbackIndex;
       String ratioPacketLost = ""; 
       String ratioFramesLost = ""; 
@@ -480,7 +480,7 @@ public class Client {
       if (rs.latestSequenceNumber != 0) {
         ratioPacketLost = df.format((double) (rs.latestSequenceNumber - rs.receivedPackets) / (double)  rs.latestSequenceNumber);
         ratioCorrectedPacketsLost = df.format((double) rs.correctedPackets / (double) rs.latestSequenceNumber); //rs.notCorrectedPackets);
-        ratioNotCorrectedPacketsLost = df.format((double) 1 - ( rs.correctedPackets / (double) (rs.correctedPackets + rs.notCorrectedPackets)));
+        ratioNotCorrectedPacketsLost = df.format((double) rs.notCorrectedPackets / (double) (rs.latestSequenceNumber));
       }
       if (rs.requestedFrames != 0) ratioFramesLost = df.format((double) rs.framesLost / (double) rs.requestedFrames);
       pufferLabel.setText(
