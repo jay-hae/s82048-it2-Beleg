@@ -1,0 +1,15 @@
+k=2:
+    gute Quali, viele Korrikiert, aber hohe Redundanz
+
+k=6:
+
+
+k=10:
+    erkennbar schlechtere Quali
+
+K=8:
+    optimum
+
+Restfehler-wk:
+    KW 46, F 11
+    für k=2, 3, 5, 10, 20, 48 mit P = 0.1

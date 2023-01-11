@@ -5,7 +5,8 @@
 
 port=8554
 #video=videos/htw.mjpeg
-video=output.mjpeg
+#video=output.mjpeg
+video=minecraft.mjpeg
 src=src
 bin=out/production/RTSP-Streaming
 

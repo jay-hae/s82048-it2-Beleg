@@ -490,8 +490,8 @@ public class Client {
               + String.valueOf(rs.playbackIndex)+ " / " 
               + "Summe empf.: "
               + String.valueOf(rs.receivedPackets) + " / "
-              + "Angeforderte Frames: "
-              + String.valueOf(rs.requestedFrames));
+              + "alle Packete: "
+              + String.valueOf(rs.latestSequenceNumber));
       statsLabel.setText(
           "<html> Abspielzähler: verlorene Medienpakete: " 
               + String.valueOf(rs.packetsLost)
@@ -504,11 +504,7 @@ public class Client {
       fecLabel.setText(
           "FEC: korrigiert / nicht korrigiert: "
               + String.valueOf(rs.correctedPackets) + " / " + String.valueOf(rs.notCorrectedPackets)
-              + " Ratio: " + ratioNotCorrectedPacketsLost  // ?? muss das sein?
-              + " / "
-              + "nicht korrigiert: "
-              + String.valueOf(rs.notCorrectedPackets) + " / "
-              + " Ratio: "+ ratioNotCorrectedPacketsLost );
+              + " Ratio: " + ratioNotCorrectedPacketsLost);
     }
   }
 

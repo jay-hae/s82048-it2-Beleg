@@ -4,8 +4,9 @@
 # für Eclipse sind die Verzeichnisse entsprechend anzupassen
 
 port=8554
-#video=videos/htw.mjpeg
-video=htw.mjpeg
+#video=htw.mjpeg
+#video=output.mjpeg
+video=minecraft.mjpeg
 src=src
 bin=out/production/RTSP-Streaming
 
