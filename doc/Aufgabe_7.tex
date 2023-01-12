@@ -12,6 +12,7 @@
 
 \title{Internettechnologien 2 - Beleg Aufgabe 7}
 \author{Jakob Häcker - s82048}
+\date{}
 
 \begin{titlepage}
    \maketitle
@@ -35,13 +36,20 @@
                 P_{Gruppe} = 1 - \left((1-P)^{k+1} + \binom{k+1}{1} \cdot P \cdot (1-P)^k \right)
             \end{align*}
 
-        Bei der Überprüfung der Restfehlerwahrscheinlichkeit durch gemessene Werte zeigt sich jedoch eine erhebliche Diskrepanz zur Vermuteten Theorie.
+        Bei der Überprüfung der Restfehlerwahrscheinlichkeit durch gemessene Werte zeigt sich jedoch eine erhebliche Diskrepanz zur vermuteten Theorie.
         Dies kann Verschiedene Gründe haben.
         Der Wahrscheinlichste ist, das die Vermutung noch nicht ganz Richtig ist, da das an $P_{Gruppe}$ multiplizierte $P$ die Verlustwahrscheinlichkeit aller übertragenen Packete ist und eben nicht nur die Verlustwahrscheinlichkeit
         der Medienpackete ist. Eine exakte theoretische Bestimmung ist nicht gelungen der gesuchten Wahrscheinlichkeit ist nicht gelungen.
+        \\
+        Eine weitere Fehlerquelle könnte die Länge des Videos sein, da nicht genug Packet zur Verfügung standen um die wahre Verteilung, nach dem Gesetz der großen Zahlen aus der Statistik, zu approximieren.
+        Anders gesagt: die Anzahl der nicht korrigierten Packete bei der Messung könnte zu klein gewesen sein.
+        Diesen Effekt sieht man in der folgenden Grafik für k = 2 sehr gut, da nicht repräsentant viele "nicht korrigierte Medeienpacket" bei der Messung entstanden sind.
+        Somit ist die Differenz zur theoretischen Kurve größer als bei der Gruppengröße k = 5.
 
         \includegraphics[width=1\textwidth,scale=0.5]{11-01-2023-23:03:16.png}
         Die grünen Punkt entschprechen der Messung bei einer Gruppengröße von k = 5, die blauen einer Gruppengröße von k = 2.
 
+    \section{Kompatiblität mit VLC}
+        VLC konnte das Dateiformat nicht Ordnungs gemäß abspielen. Es wurde nur der erste Frame angezeigt und blieb für die Länge des Videos unverändert.
 \end{document}
 
